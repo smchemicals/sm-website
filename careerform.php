@@ -18,57 +18,57 @@ if(isset($_POST['submit'])){
     $subject = "Application from: ".$name." for ".$job.".";
 
     $message = "
-<html>
-<head>
-<style>
-    tbody{
-        background-color: #ECEFF1;
-    }
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 5px solid #fff;
-    }
-    p{
-        color: #25374F; 
-        font-size:24px;
-        font-family: Helvetica, sans-serif; 
-        font-weight:300;
-    }
-</style>
-</head>
-<body>
-    <table style='width:800px;'>
-        <tbody>
-            <tr>
-                <td style='width:190px;'><p>Name :</p></td>
-                <td style='width:400px'><p>$name</p></td>
-            </tr>
-            <tr>
-                <td style='width:190px;'><p>E-Mail ID :</p></td>
-                <td style='width:400px'><p>$from</p></td>
-            </tr>
-            <tr>
-                <td style='width:190px;'><p>Mobile No :</p></td>
-                <td style='width:400px'><p>$phone</p></td>
-            </tr>
-            <tr>
-                <td style='width:190px;'><p>Application for :</p></td>
-                <td style='width:400px'><p>$job</p></td>
-            </tr>
-            <tr>
-                <td style='width:190px;'><p>Cover Letter :</p></td>
-                <td style='width:400px'><p>$cover_letter</p></td>
-            </tr>
-        </tbody>
-    </table>
-</body>
-</html>
-";
+        <html>
+        <head>
+        <style>
+            tbody{
+                background-color: #ECEFF1;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th, td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 5px solid #fff;
+            }
+            p{
+                color: #25374F; 
+                font-size:24px;
+                font-family: Helvetica, sans-serif; 
+                font-weight:300;
+            }
+        </style>
+        </head>
+        <body>
+            <table style='width:800px;'>
+                <tbody>
+                    <tr>
+                        <td style='width:190px;'><p>Name :</p></td>
+                        <td style='width:400px'><p>$name</p></td>
+                    </tr>
+                    <tr>
+                        <td style='width:190px;'><p>E-Mail ID :</p></td>
+                        <td style='width:400px'><p>$from</p></td>
+                    </tr>
+                    <tr>
+                        <td style='width:190px;'><p>Mobile No :</p></td>
+                        <td style='width:400px'><p>$phone</p></td>
+                    </tr>
+                    <tr>
+                        <td style='width:190px;'><p>Application for :</p></td>
+                        <td style='width:400px'><p>$job</p></td>
+                    </tr>
+                    <tr>
+                        <td style='width:190px;'><p>Cover Letter :</p></td>
+                        <td style='width:400px'><p>$cover_letter</p></td>
+                    </tr>
+                </tbody>
+            </table>
+        </body>
+        </html>
+        ";
 
     $attachment = chunk_split(base64_encode(file_get_contents($_FILES["resume"]["tmp_name"])));
     $resume_name = $resume_name . "_" . basename($_FILES["resume"]["name"]);
