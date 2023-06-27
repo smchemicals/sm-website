@@ -42,14 +42,26 @@ if (isset($_POST['submit'])) {
 
     // Email body
     $body = "--$boundary\r\n";
-    $body .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
-    $body .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
-    $body .= "First Name: $firstName\r\n";
-    $body .= "Last Name: $lastName\r\n";
-    $body .= "Phone: $phone\r\n";
-    $body .= "Email: $email\r\n";
-    $body .= "Applying for: $job\r\n";
-    $body .= "Message:\r\n$message\r\n";
+    $body .= "Content-Type: multipart/alternative; boundary=\"$boundary\"\r\n\r\n";
+
+    // HTML version of the email
+    $body .= "--$boundary\r\n";
+    $body .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $body .= "Content-Transfer-Encoding: quoted-printable\r\n\r\n";
+    $body .= "<html>
+                <body>
+                    <h2>Job Application</h2>
+                    <p><strong>First Name:</strong> $firstName</p>
+                    <p><strong>Last Name:</strong> $lastName</p>
+                    <p><strong>Phone:</strong> $phone</p>
+                    <p><strong>Email:</strong> $email</p>
+                    <p><strong>Applying for:</strong> $job</p>
+                    <p><strong>Message:</strong></p>
+                    <p>$message</p>
+                </body>
+            </html>\r\n\r\n";
+
+    // Attachment
     $body .= "--$boundary\r\n";
     $body .= "Content-Type: application/pdf; name=\"$resumeName\"\r\n";
     $body .= "Content-Transfer-Encoding: base64\r\n";
@@ -59,9 +71,19 @@ if (isset($_POST['submit'])) {
 
     // Send acknowledgment email
     $ackSubject = 'Acknowledgment - Job Application';
-    $ackMessage = "Dear $firstName,\r\n\r\nThank you for your job application. We have received your application and will review it soon.\r\n\r\nBest regards,\r\nSM Chemicals\r\n \r\nAddress:\r\nHouse No 2-2-1137/5/B \r\nNew Nallakunta, Hyderabad - 500 044, T.S\r\nMobile: +91 - 9246181170 \r\n \r\nE-Mail: smchemicals@gmail.com, smchemicalsofficial@gmail.com \r\nVisit us at http://www.smchemicals.co.in";
+    $ackMessage = "<html>
+                    <body>
+                        <p>Dear $firstName,</p>
+                        <p>Thank you for your job application. We have received your application and will review it soon.</p>
+                        <p>Best regards,<br>SM Chemicals</p>
+                        <p>Address:<br>House No 2-2-1137/5/B<br>New Nallakunta, Hyderabad - 500 044, T.S<br>Mobile: +91 - 9246181170</p>
+                        <p>E-Mail: smchemicals@gmail.com, smchemicalsofficial@gmail.com<br>Visit us at <a href='http://www.smchemicals.co.in'>http://www.smchemicals.co.in</a></p>
+                    </body>
+                </html>";
     $ackHeaders = "From: $from\r\n";
     $ackHeaders .= "Reply-To: $to\r\n";
+    $ackHeaders .= "MIME-Version: 1.0\r\n";
+    $ackHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
 
     if (mail($to, $subject, $body, $headers) && mail($email, $ackSubject, $ackMessage, $ackHeaders)) {
         // Message if mail has been sent
@@ -76,3 +98,4 @@ if (isset($_POST['submit'])) {
             </script>";
     }
 }
+?>
