@@ -11,10 +11,20 @@ if (isset($_POST['submit'])) {
     // File path and name of the uploaded resume
     $resumePath = $_FILES['resume']['tmp_name'];
     $resumeName = $_FILES['resume']['name'];
+    $resumeSize = $_FILES['resume']['size'];
+
+    // Define the file size limit (in bytes)
+    $fileSizeLimit = 10 * 1024 * 1024; // 10MB
+
+    // Check if the file size exceeds the limit
+    if ($resumeSize > $fileSizeLimit) {
+        echo "Error: The file size exceeds the limit of 10MB.";
+        exit;
+    }
 
     // Email details
     $to = 'smchemicalsofficial@gmail.com';
-    $subject = "Job application from: ".$name." for ".$job.".";
+    $subject = "Job application from: $firstName $lastName for $job";
     $from = $_POST['email'];
 
     // Read the resume file content and encode it as base64
@@ -28,7 +38,7 @@ if (isset($_POST['submit'])) {
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: multipart/mixed; boundary=\"$boundary\"\r\n";
     $headers .= "X-Priority: 1\r\n";
-    $headers .= "X-Mailer: PHP". phpversion() ."\r\n" ;
+    $headers .= "X-Mailer: PHP" . phpversion() . "\r\n";
 
     // Email body
     $body = "--$boundary\r\n";
@@ -49,24 +59,20 @@ if (isset($_POST['submit'])) {
 
     // Send acknowledgment email
     $ackSubject = 'Acknowledgment - Job Application';
-    $ackMessage = "Dear $firstName,\r\n\r\nThank you for your job application. We have received your application and will review it soon.\r\n\r\nBest regards,\r\n SM Chemicals\r\n \r\nAddress:\r\n House No 2-2-1137/5/B \r\nNew Nallakunta, Hyderabad - 500 044, T.S\r\n Mobile  : +91 - 9246181170 \r\n \r\n E-Mail : smchemicals@gmail.com, smchemicalsofficial@gmail.com \r\n Visit us at http://www.smchemicals.co.in";
+    $ackMessage = "Dear $firstName,\r\n\r\nThank you for your job application. We have received your application and will review it soon.\r\n\r\nBest regards,\r\nSM Chemicals\r\n \r\nAddress:\r\nHouse No 2-2-1137/5/B \r\nNew Nallakunta, Hyderabad - 500 044, T.S\r\nMobile: +91 - 9246181170 \r\n \r\nE-Mail: smchemicals@gmail.com, smchemicalsofficial@gmail.com \r\nVisit us at http://www.smchemicals.co.in";
     $ackHeaders = "From: $from\r\n";
     $ackHeaders .= "Reply-To: $to\r\n";
 
-    if(mail($to,$subject,$body,$headers) && mail($email, $ackSubject, $ackMessage, $ackHeaders)){
+    if (mail($to, $subject, $body, $headers) && mail($email, $ackSubject, $ackMessage, $ackHeaders)) {
         // Message if mail has been sent
         echo "<script>
                 location.replace('contactus_thankyou.html');
             </script>";
-    }
-
-    else{
-        // Message if mail has been not sent
+    } else {
+        // Message if mail has not been sent
         echo "<script>
-                alert('Please retry submiting the form.');
+                alert('Please retry submitting the form.');
                 location.replace('/index');
             </script>";
     }
-
 }
-?>
