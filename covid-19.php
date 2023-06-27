@@ -2,7 +2,7 @@
     if(isset($_POST['submit']))
     {
         
-        $to = "smchemicals@gmail.com";
+        $to = "smchemicalsofficial@gmail.com";
         
         $from = $_POST['email']; //E-Mail ID value
         $first_name = $_POST['first_name'];
