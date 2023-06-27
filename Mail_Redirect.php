@@ -4,7 +4,7 @@ if (isset($_POST['submit'])) {
     $res = reCaptcha($recaptcha);
 
     if ($res['success']) {
-        $to = "smchemicals@gmail.com";
+        $to = "smchemicalsofficial@gmail.com";
         $from = $_POST['email'];
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
