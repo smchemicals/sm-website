@@ -86,7 +86,7 @@ if(isset($_POST['submit'])){
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-type: multipart/mixed; boundary=\"PHP-mixed-" . md5(time()) . "\"\r\n";
     $headers .= "X-Priority: 1\r\n";
-    $headers .= "X-Mailer: PHP" . phpversion() . "\r\n";
+    $headers .= "X-Mailer: PHP". phpversion() ."\r\n";
     
     // Set the acknowledgement email headers
     $headers_ack = "From: ". $to;
