@@ -104,7 +104,7 @@
         $headers_ack = "From: ". $to;
         $subject_ack = "Thank you ".$first_name." ".$last_name.",We will contact you soon.";
         $message_ack_pre = "Dear ".$first_name." ".$last_name.",\r\n\r\n";
-        $message_ack_post = "Best Regards,\r\n SM Chemicals\r\n \r\nAddress:\r\n House No 2-2-1137/5/B \r\nNew Nallakunta, Hyderabad - 500 044, T.S\r\n Mobile  : +91 - 9246181170 \r\n \r\n E-Mail : smchemicals@gmail.com \r\n Visit us at http://www.smchemicals.co.in";
+        $message_ack_post = "Best Regards,\r\n SM Chemicals\r\n \r\nAddress:\r\n House No 2-2-1137/5/B \r\nNew Nallakunta, Hyderabad - 500 044, T.S\r\n Mobile  : +91 - 9246181170 \r\n \r\n E-Mail : smchemicals@gmail.com,  smchemicalsofficial@gmail.com \r\n Visit us at http://www.smchemicals.co.in";
         $message_ack = $message_ack_pre."We have received your request and shall revert shortly.\r\n\r\n".$message_ack_post;
          
         if(mail($to,$subject,$message,$headers) && mail($from,$subject_ack,$message_ack,$headers_ack)){

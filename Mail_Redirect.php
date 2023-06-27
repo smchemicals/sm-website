@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
         $headers_ack = "From: " . $to;
         $subject_ack = "Thank you, " . $first_name . " " . $last_name . ". We will contact you soon.";
         $message_ack_pre = "Dear " . $first_name . " " . $last_name . ",\r\n\r\n";
-        $message_ack_post = "Best Regards,\r\nSM Chemicals\r\n\r\nAddress:\r\nHouse No 2-2-1137/5/B\r\nNew Nallakunta, Hyderabad - 500 044, T.S\r\nMobile: +91 - 9246181170\r\n\r\nE-Mail: smchemicals@gmail.com\r\nVisit us at http://www.smchemicals.co.in";
+        $message_ack_post = "Best Regards,\r\nSM Chemicals\r\n\r\nAddress:\r\nHouse No 2-2-1137/5/B\r\nNew Nallakunta, Hyderabad - 500 044, T.S\r\nMobile: +91 - 9246181170\r\n\r\nE-Mail: smchemicals@gmail.com,  smchemicalsofficial@gmail.com\r\nVisit us at http://www.smchemicals.co.in";
         $message_ack = $message_ack_pre . "We have received your request and shall revert shortly.\r\n\r\n" . $message_ack_post;
 
         mail($from, $subject_ack, $message_ack, $headers_ack);
